@@ -66,18 +66,18 @@ int main(int argc, char *argv[])
 
     // Parent process
     if (forkStatus > 0) {
-        // printf("ALARM BASLADI calismasi istenen saniye : %d\n", killChildInSec);
-        //printf("[hw1] %dsn boyunca test2 çaliştirilacak...", killChildInSec);
 
+        // Alarm baslatildi.
         alarm(killChildInSec);
 
+        // Belirtilen sure sonunsa sinyalin gonderilip process'in terminate edilmesini bekle
         wait(NULL);
     }
     
     // Child process
     if (forkStatus == 0) {
 
-        char *args[] = {"subprocess", NULL}; // Calistirilacak programa verilecek argumanlar listesi. NULL ile bitmesi gerekiyor.
+        char *args[] = {"test", NULL}; // Calistirilacak programa verilecek argumanlar listesi. NULL ile bitmesi gerekiyor.
 
         // execv() fonskiyonu, -1 degeri dondururse program caslistirilamadi.
         // execv() fonskiyonu, hicbir deger donmezse dogru calismis olur.
@@ -95,8 +95,8 @@ int main(int argc, char *argv[])
 // Sinyal gonderildigince calisir.
 void alarmHandler(int sig)
 {
-    printf("\n\n[hw1] %dsn sona erdi process kapatiliyor...%d\n", killChildInSec, getpid());
-    kill(forkStatus, SIGKILL);
+    printf("\n\n[hw1] %dsn sona erdi process kapatiliyor...pid = %d\n", killChildInSec, getpid());
+    kill(forkStatus, SIGTERM);
 }
 
 // Main fonskiyonuna arguman olarak verilen saniye degerini int tipine cevirir.
