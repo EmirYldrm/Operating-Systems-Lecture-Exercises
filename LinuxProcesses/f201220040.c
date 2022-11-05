@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
         // Alarm baslatildi.
         alarm(killChildInSec);
 
-        // Belirtilen sure sonunsa sinyalin gonderilip process'in terminate edilmesini bekle
+        // Istenen sure sonunsa sinyalin gonderilip process'in terminate edilmesini bekle
         wait(NULL);
     }
     
